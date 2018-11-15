@@ -1,0 +1,27 @@
+{
+  "name": "i18n-phone-formatter",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && gulp",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
+  },
+  "dependencies": {
+    "@sturdynut/i18n-phone-lib": "^0.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.4",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-umd": "^2.0.0",
+    "jest": "^23.6.0"
+  }
+}
