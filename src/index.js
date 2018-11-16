@@ -1,6 +1,23 @@
 import { goog, i18n } from '@sturdynut/i18n-phone-lib';
 
 /**
+ * Remove any non numeric characters from the phone number but leave any plus sign at the beginning
+ *
+ * @export
+ * @param {string} phone
+ * @returns string
+ */
+export function cleanPhone(phone) {
+  phone = phone.replace(/[^\d\+]/g,'');
+  if (phone.substr(0, 1) == "+") {
+    phone = "+" + phone.replace(/[^\d]/g,'');
+  } else {
+    phone = phone.replace(/[^\d]/g,'');
+  }
+  return phone;
+}
+
+/**
  * Return the country code for an e164 formatted number
  *
  * @export

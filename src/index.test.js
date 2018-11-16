@@ -1,7 +1,54 @@
+import _ from 'lodash';
 import {
+  cleanPhone,
   countryForE164Number,
   formatNumberForMobileDialing
 } from './index';
+
+describe('cleanPhone', () => {
+  test('it can clean a decent numbers', () => {
+    const phonesToClean = [
+      '+(555)-555-5555',
+      '+(555) 555 5555',
+      '+(555).555.5555',
+      '+555-555-5555',
+      '+555 555 5555',
+      '+555.555.5555',
+      '(555)-555-5555',
+      '(555) 555 5555',
+      '(555).555.5555',
+      '555-555-5555',
+      '555 555 5555',
+      '555.555.5555',
+    ];
+
+    const cleanedPhonesCount = _(phonesToClean)
+      .map(cleanPhone)
+      .uniq()
+      .value()
+      .length;
+
+    expect(cleanedPhonesCount).toEqual(2);
+  });
+
+  test('it can clean indecent numbers', () => {
+    const phonesToClean = [
+      '_____+(555)-_)@#$#@!(555-5555',
+      '+(555) 555 ___))(  # #**$&5555',
+      '~!!@##    ?/.<><+~~(555).555.5555',
+      '+ 5 5     5 - 5  5     5-:{":;;    5 5 5 5   ',
+      '+                    555 555 5555 \n\n^28**8 INSERT INTO * FROM',
+    ];
+
+    const cleanedPhonesCount = _(phonesToClean)
+      .map(cleanPhone)
+      .uniq()
+      .value()
+      .length;
+
+    expect(cleanedPhonesCount).toEqual(2);
+  });
+})
 
 describe('countryForE164Number', () => {
   test('it can detect a US number', () => {
@@ -23,33 +70,22 @@ describe('countryForE164Number', () => {
 describe('formatNumberForMobileDialing', () => {
   test('it can format a US number', () => {
     const result = formatNumberForMobileDialing('US', '4155552671');
-    expect(result).toBe('US');
+    expect(result).toBe('+1 415-555-2671');
+  });
+
+  test('it can format a Finnish number', () => {
+    const result = formatNumberForMobileDialing('FI', '+358-9-1911');
+    expect(result).toBe('09 1911'); // @todo - This seems a bit off...wth
+  });
+
+  test('it can format an Indonesian number', () => {
+    const result = formatNumberForMobileDialing('IN', '+62 623 61751214');
+    expect(result).toBe('+62 623 61751214');
   });
 });
 
 
-// // -------------------------------------------------------------------------
-// function formatNumberForMobileDialing(country, phone) {
-//   /*
 
-//   Returns a number formatted in such a way that it can be dialed from a mobile
-//   phone in a specific region. If the number cannot be reached from the region
-//   (e.g. some countries block toll-free numbers from being called outside of the
-//   country), the method returns an empty string.
-
-//   */
-
-//   try {
-//       var phone = cleanPhone(phone);
-//       var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
-//       var number = phoneUtil.parseAndKeepRawInput(phone, country);
-//       var output = new goog.string.StringBuffer();
-//       output = phoneUtil.formatNumberForMobileDialing(number, country, true);
-//       return output.toString();
-//   } catch (e) {
-//       return "";
-//   }
-// }
 
 // // -------------------------------------------------------------------------
 // function isValidNumber(phone, country, type) {
@@ -199,24 +235,6 @@ describe('formatNumberForMobileDialing', () => {
 //   }
 // }
 
-// // -------------------------------------------------------------------------
-// function cleanPhone(phone) {
-//   /*
-
-//   Remove any non numeric characters from the phone number but leave any plus sign at the beginning
-
-//   phone (String) phone number to clean
-
-//   */
-
-//   phone = phone.replace(/[^\d\+]/g,'');
-//   if (phone.substr(0, 1) == "+") {
-//       phone = "+" + phone.replace(/[^\d]/g,'');
-//   } else {
-//       phone = phone.replace(/[^\d]/g,'');
-//   }
-//   return phone;
-// }
 
 // // -------------------------------------------------------------------------
 // function countryCodeToName(countryCode) {
