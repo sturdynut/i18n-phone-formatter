@@ -2,7 +2,8 @@ import _ from 'lodash';
 import {
   cleanPhone,
   countryForE164Number,
-  formatNumberForMobileDialing
+  formatNumberForMobileDialing,
+  isValidNumber
 } from './index';
 
 describe('cleanPhone', () => {
@@ -82,42 +83,66 @@ describe('formatNumberForMobileDialing', () => {
     const result = formatNumberForMobileDialing('IN', '+62 623 61751214');
     expect(result).toBe('+62 623 61751214');
   });
+
+  test('it can format a Japanese number', () => {
+    const result = formatNumberForMobileDialing('JP', '81 3-5159-8200');
+    expect(result).toBe('03-5159-8200');
+  });
 });
 
+describe('isValidNumber', () => {
+  test('it can validate a valid number', () => {
+    const validNumberTests = [
+      {
+        number: '4155552671',
+        country: 'US',
+        type: 1
+      },
+      {
+        number: '35891911',
+        country: 'FI',
+        type: 1
+      },
+      {
+        number: '81 3-5159-8200',
+        country: 'JP',
+        type: 1
+      },
+    ]
+
+    validNumberTests.forEach(({ number, country, type }) => {
+      expect(isValidNumber(number, country, type)).toBeTruthy();
+    })
+  });
+
+  test('it can invalidate an invalid number', () => {
+    const invalidNumberTests = [
+      {
+        number: 'aaa',
+        country: 'US',
+        type: 1
+      },
+      {
+        number: 'bbb',
+        country: 'FI',
+        type: 1
+      },
+      {
+        number: 'ccc',
+        country: 'JP',
+        type: 1
+      },
+    ]
+
+    invalidNumberTests.forEach(({ number, country, type }) => {
+      expect(isValidNumber(number, country, type)).toBeFalsy();
+    })
+  });
+})
 
 
 
-// // -------------------------------------------------------------------------
-// function isValidNumber(phone, country, type) {
-//   /*
 
-//   Tests whether a phone number matches a valid pattern. Note this doesn't
-//   verify the number is actually in use, which is impossible to tell by just
-//   looking at a number itself.
-
-//   */
-
-//   try {
-//       var phone = cleanPhone(phone);
-//       var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
-//       var number = phoneUtil.parseAndKeepRawInput(phone, country);
-//       if (typeof type === 'string') {
-//           var type = type.toUpperCase();
-//           if (phoneUtil.isValidNumber(number) &&
-//               phoneUtil.getNumberType(number) === i18n.phonenumbers.PhoneNumberType[type]) {
-//               return true;
-//           }
-//           else {
-//               return false;
-//           }
-//       }
-//       else {
-//           return phoneUtil.isValidNumber(number);
-//       }
-//   } catch (e) {
-//       return false;
-//   }
-// }
 
 // // -------------------------------------------------------------------------
 // function formatE164(country, phone) {

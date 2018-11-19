@@ -8,11 +8,11 @@ import { goog, i18n } from '@sturdynut/i18n-phone-lib';
  * @returns string
  */
 export function cleanPhone(phone) {
-  phone = phone.replace(/[^\d\+]/g,'');
-  if (phone.substr(0, 1) == "+") {
-    phone = "+" + phone.replace(/[^\d]/g,'');
+  phone = phone.replace(/[^\d\+]/g, '');
+  if (phone.substr(0, 1) == '+') {
+    phone = '+' + phone.replace(/[^\d]/g, '');
   } else {
-    phone = phone.replace(/[^\d]/g,'');
+    phone = phone.replace(/[^\d]/g, '');
   }
   return phone;
 }
@@ -50,4 +50,38 @@ export function formatNumberForMobileDialing(country, phone) {
   let output = new goog.string.StringBuffer();
   output = phoneUtil.formatNumberForMobileDialing(number, country, true);
   return output.toString();
+}
+
+/**
+ * Tests whether a phone number matches a valid pattern. Note this doesn't
+ * verify the number is actually in use, which is impossible to tell by just
+ * looking at a number itself.
+ *
+ * @param {string} phone
+ * @param {string} country
+ * @param {string} type - One of FIXED_LINE:0, MOBILE:1, FIXED_LINE_OR_MOBILE:2, TOLL_FREE:3, PREMIUM_RATE:4, SHARED_COST:5, VOIP:6, PERSONAL_NUMBER:7, PAGER:8, UAN:9, VOICEMAIL:10, UNKNOWN:-1
+ * @returns
+ */
+export function isValidNumber(phone, country, type) {
+  try {
+    const cleanPhoneNumber = cleanPhone(phone);
+    const phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
+    const number = phoneUtil.parseAndKeepRawInput(cleanPhoneNumber, country);
+    if (typeof type === 'string') {
+      const type = type.toUpperCase();
+      if (
+        phoneUtil.isValidNumber(number) &&
+        phoneUtil.getNumberType(number) ===
+          i18n.phonenumbers.PhoneNumberType[type]
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return phoneUtil.isValidNumber(number);
+    }
+  } catch {
+    return false;
+  }
 }
