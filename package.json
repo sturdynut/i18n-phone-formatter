@@ -9,7 +9,7 @@
     "test:watch": "jest --watchAll",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@sturdynut/i18n-phone-lib": "latest"
   },
   "devDependencies": {

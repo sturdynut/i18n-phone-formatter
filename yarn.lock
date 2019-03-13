@@ -518,10 +518,6 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@sturdynut/i18n-phone-lib@latest":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@sturdynut/i18n-phone-lib/-/i18n-phone-lib-0.0.3.tgz#587bb7c8768d4e47d54740076acab38152819669"
-
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
