@@ -10,7 +10,7 @@
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
-    "@sturdynut/i18n-phone-lib": "^0.0.3"
+    "@sturdynut/i18n-phone-lib": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
