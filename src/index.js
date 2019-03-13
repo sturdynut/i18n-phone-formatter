@@ -9,7 +9,7 @@ import { goog, i18n } from '@sturdynut/i18n-phone-lib';
  */
 export function cleanPhone(phone) {
   phone = phone.replace(/[^\d\+]/g, '');
-  if (phone.substr(0, 1) == '+') {
+  if (phone.substr(0, 1) === '+') {
     phone = '+' + phone.replace(/[^\d]/g, '');
   } else {
     phone = phone.replace(/[^\d]/g, '');
@@ -92,8 +92,8 @@ export function isValidNumber(phone, country, type) {
  *    - phone (String) phone number to format
  *
  * @export
- * @param {*} country
- * @param {*} phone
+ * @param {string} country
+ * @param {string} phone
  * @returns
  */
 export function formatE164(country, phone) {
@@ -115,8 +115,8 @@ export function formatE164(country, phone) {
  *    - country (String) 2 digit country code
  *    - phone (String) phone number to format
  *
- * @param {*} country
- * @param {*} phone
+ * @param {string} country
+ * @param {string} phone
  * @returns
  */
 export function formatInternational(country, phone) {
@@ -140,8 +140,8 @@ export function formatInternational(country, phone) {
  *    - phone (String) phone number to format
  *
  * @export
- * @param {*} country
- * @param {*} phone
+ * @param {string} country
+ * @param {string} phone
  * @returns
  */
 export function formatLocal(country, phone) {
@@ -167,7 +167,7 @@ export function formatLocal(country, phone) {
  *    - country (String) 2 digit country code
  *
  * @export
- * @param {*} country
+ * @param {string} country
  * @returns
  */
 export function exampleLandlineNumber(country) {
@@ -185,7 +185,7 @@ export function exampleLandlineNumber(country) {
  *    - country (String) 2 digit country code
  *
  * @export
- * @param {*} country
+ * @param {string} country
  * @returns
  */
 export function exampleMobileNumber(country) {
