@@ -21,9 +21,12 @@
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.0.1",
-    "gulp-umd": "^2.0.0",
     "gulp-uglify": "^3.0.1",
+    "gulp-umd": "^2.0.0",
     "jest": "^23.6.0",
     "lodash": "^4.17.11"
+  },
+  "dependencies": {
+    "@sturdynut/i18n-phone-lib": "latest"
   }
 }
