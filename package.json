@@ -1,5 +1,5 @@
 {
-  "name": "i18n-phone-formatter",
+  "name": "@sturdynut/i18n-phone-formatter",
   "version": "0.0.2",
   "main": "dist/index.js",
   "license": "MIT",
