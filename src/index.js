@@ -1,4 +1,7 @@
-const { goog, i18n } = require('@sturdynut/i18n-phone-lib');
+import {
+  goog,
+  i18n
+} from '@sturdynut/i18n-phone-lib';
 
 /**
  * Remove any non numeric characters from the phone number but leave any plus sign at the beginning
