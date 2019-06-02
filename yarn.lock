@@ -518,9 +518,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@sturdynut/i18n-phone-lib@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@sturdynut/i18n-phone-lib/-/i18n-phone-lib-0.0.6.tgz#ca107ab6486d7dc50ca530742c00b2264cc5c1e8"
+"@sturdynut/i18n-phone-lib@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@sturdynut/i18n-phone-lib/-/i18n-phone-lib-0.0.8.tgz#5e4ce99a1f8382d0eb8e3a5ecd6b558184f1e3e5"
 
 "@types/estree@0.0.39":
   version "0.0.39"
