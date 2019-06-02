@@ -1,16 +1,16 @@
 {
   "name": "@sturdynut/i18n-phone-formatter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf ./dist && rollup -c",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "peerDependencies": {
-    "@sturdynut/i18n-phone-lib": "^0.0.6"
+    "@sturdynut/i18n-phone-lib": "^0.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
@@ -24,6 +24,6 @@
     "rollup-plugin-terser": "^4.0.4"
   },
   "dependencies": {
-    "@sturdynut/i18n-phone-lib": "^0.0.6"
+    "@sturdynut/i18n-phone-lib": "^0.0.8"
   }
 }
